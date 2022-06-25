@@ -2,7 +2,7 @@
 
 The mapping files (`tr_offset_######.json, ...`) containing header text add up to 1.1GB uncompressed. The file `.data/offset_map.json` keeps the minimal information necessary to perform the look up, and has the following format:
 
-```json
+```js
 {
   "1000000105": [
     [318, 16532, 28165 /* ... */],
@@ -36,12 +36,12 @@ In the above example, within document `"1000000105"`, given say, non-Octavo offs
 
 The `POST` endpoint `/octavify` accepts a request body in JSON:
 
-```json
+```js
 [
-  { "id": "1000000105", "offsets": [20000] },
-  { "id": "1000000106", "offsets": [1000] }
+  { id: "1000000105", offsets: [20000] },
+  { id: "1000000106", offsets: [1000] },
   // ...
-]
+];
 ```
 
 The request payload is an array of objects, each with two fields:
@@ -51,12 +51,12 @@ The request payload is an array of objects, each with two fields:
 
 The response is a JSON array in the same shape, only that the offsets are now converted to Octavo offsets:
 
-```json
+```js
 [
-  { "id": "1000000105", "offsets": [20112] },
-  { "id": "1000000106", "offsets": [1052] }
+  { id: "1000000105", offsets: [20112] },
+  { id: "1000000106", offsets: [1052] },
   // ...
-]
+];
 ```
 
 Try it with cURL:
