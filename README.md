@@ -4,9 +4,15 @@ The mapping files (`tr_offset_######.json, ...`) containing header text add up t
 
 ```json
 {
-  "": [[], []],
-  "": [[], []],
-  ...
+  "1000000105": [
+    [318, 16532, 28165 /* ... */],
+    [54, 112, 149 /* ... */]
+  ],
+  "1000000106": [
+    [258, 1933 /* ... */],
+    [52, 139 /* ... */]
+  ]
+  /* ... */
 }
 ```
 
@@ -17,7 +23,7 @@ The lookup map is keyed by document ID, each value is a tuple of two arrays (alw
 
 The adjustment value provided is "cumulative", it includes all the adjustments up to the next "milestone", not just the length of the last header. Thus, to calculate how much "shift" should be added to get the Octavo offset, we find the furthermost "milestone" that the normal-text offset has surpassed, and add the corresponding adjustment.
 
-In the above example, within document `ID`, given say, non-Octavo offset `x`, it is larger than (`gte`) the "milestone" `y` (but less than the next "milestone" `y'`), so we add the adjustment corresponding to `y`, which is `z` in the second array.
+In the above example, within document `"1000000105"`, given say, non-Octavo offset `20000`, it is larger than (`gte`) the "milestone" `16532` (but less than the next "milestone" `28165`), so we add the adjustment corresponding to `16532` (at index `[1]`), which is `112` (at index `[1]`) in the second array.
 
 > Mikko Kivistö mentioned two things about the mapping files
 >
@@ -32,23 +38,27 @@ The `POST` endpoint `/octavify` accepts a request body in JSON:
 
 ```json
 [
-  { "id": "", "offsets": [] },
-  { "id": "", "offsets": [] },
-  ...
+  { "id": "1000000105", "offsets": [20000] },
+  { "id": "1000000106", "offsets": [1000] }
+  // ...
 ]
 ```
 
 The request payload is an array of objects, each with two fields:
 
-- `id` (`string`): document ID
-- `offsets` (`number[]`): list of non-Octavo offsets to be converted
+- `id`: document ID (`string`)
+- `offsets`: list (`number[]`) of non-Octavo offsets to be converted
 
 The response is a JSON array in the same shape, only that the offsets are now converted to Octavo offsets:
 
 ```json
 [
-  { "id": "", "offsets": [] },
-  { "id": "", "offsets": [] },
-  ...
+  { "id": "1000000105", "offsets": [20112] },
+  { "id": "1000000106", "offsets": [1052] }
+  // ...
 ]
 ```
+
+## Deployment
+
+This repo is deployable as a Docker image on Rahti, see `Dockerfile` for details.
