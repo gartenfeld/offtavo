@@ -62,7 +62,7 @@ The response is a JSON array in the same shape, only that the offsets are now co
 Try it with cURL:
 
 ```shell
-curl --location --request POST '<host>/octavify' \
+curl --location --request POST 'https://offtavo-kaiku.rahtiapp.fi/octavify' \
 --header 'Content-Type: application/json' \
 --data-raw '[
     {
