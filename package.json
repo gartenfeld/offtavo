@@ -1,0 +1,15 @@
+{
+  "name": "offtavo",
+  "version": "0.0.1",
+  "description": "Map OCR offsets generated from normal text to Octavo's heading-adjusted offsets",
+  "main": "server.js",
+  "repository": "https://github.com/gartenfeld/offtavo.git",
+  "author": "David Rosson <david@rosson.com.au>",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1"
+  }
+}
