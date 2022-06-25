@@ -59,6 +59,19 @@ The response is a JSON array in the same shape, only that the offsets are now co
 ]
 ```
 
+Try it with cURL:
+
+```shell
+curl --location --request POST '<host>/octavify' \
+--header 'Content-Type: application/json' \
+--data-raw '[
+    {
+        "id": "1000000105",
+        "offsets": [20000, 30000, 50000]
+    }
+]'
+```
+
 ## Deployment
 
 This repo is deployable as a Docker image on Rahti, see `Dockerfile` for details.
